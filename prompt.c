@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static char input[2048];
+#include <readline/readline.h>
+#include <readline/history.h>
 
 int main(int argc, char** argv) {
   while (1) {
-    fputs("josh_lisp >", stdout);
+    char* input = readline("josh_lisp> ");
+    add_history(input);
 
-    fgets(input, 2048, stdin);
+    if (!input)
+      break;
 
     printf("no, you're a %s\n", input);
+
+    free(input);
   }
   return 0;
 }
